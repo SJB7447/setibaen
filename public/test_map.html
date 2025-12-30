@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="origin">
+    <title>Test Map</title>
+    <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=1e5qreqdjl"></script>
+</head>
+
+<body>
+    <h1>Naver Map Isolation Test</h1>
+    <div id="map" style="width:100%;height:400px;background:#f0f0f0;"></div>
+    <div id="status">Loading...</div>
+
+    <script>
+        window.addEventListener('load', function () {
+            var statusDiv = document.getElementById('status');
+            try {
+                if (typeof naver === 'undefined') {
+                    statusDiv.innerText = "Error: 'naver' object is undefined. Script failed to load.";
+                    statusDiv.style.color = 'red';
+                    return;
+                }
+
+                var map = new naver.maps.Map('map', {
+                    center: new naver.maps.LatLng(37.5666805, 126.9784147),
+                    zoom: 10
+                });
+                statusDiv.innerText = "Success: Map initialized.";
+                statusDiv.style.color = 'green';
+            } catch (e) {
+                statusDiv.innerText = "Error initializing map: " + e.message;
+                statusDiv.style.color = 'red';
+            }
+        });
+    </script>
+</body>
+
+</html>
